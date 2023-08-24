@@ -3,6 +3,7 @@ package org.itstep;
 import org.itstep.entities.User;
 
 import java.util.InputMismatchException;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -16,7 +17,11 @@ public class Main {
 //        Task3();
 //        Task4();
 //        Task5();
-        Task6();
+//        Task6();
+//        Task7();
+//        Task8();
+        Task9();
+//        Task10();
     }
 
     public static void Task1(){
@@ -171,26 +176,164 @@ public class Main {
             }
         }
 
+        double res;
         if(choice == 1){
-            double res = number * 0.000621371;
+            res = number * 0.000621371;
             System.out.println(number + " метров равно " + res + " милям");
         }
 
         if(choice == 2){
-            double res = number * 39.3701;
+            res = number * 39.3701;
             System.out.println(number + " метров равно " + res + " дюймам");
         }
 
         if(choice == 3){
-            double res = number * 1.09361;
+            res = number * 1.09361;
             System.out.println(number + " метров равно " + res + " ярдам");
         }
 
         scanner.close();
     }
     public static void Task7(){
+//        Задание 7
+//        Пользователь вводит с клавиатуры два числа. Нужно
+//        показать все нечетные числа в указанном диапазоне. Если
+//        границы диапазона указаны неправильно требуется произвести нормализацию границ. Например, пользователь
+//        ввел 20 и 11, требуется нормализация, после которой
+//        начало диапазона станет равно 11, а конец 20.
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Введите первое число");
+        int firstNum = scanner.nextInt();
+
+        System.out.println("Введите второе число");
+        int secondNum = scanner.nextInt();
+
+        if(firstNum > secondNum){
+            System.out.println("Ok");
+            int temp = firstNum;
+            firstNum = secondNum;
+            secondNum = temp;
+        }
+
+        for (int i = firstNum;i <= secondNum; i++){
+            if(i % 2 != 0){
+                System.out.println(i + "\n");
+            }
+        }
 
     }
+    public static void Task8(){
+//        Задание 8
+//        Показать на экран таблицу умножения в диапазоне, указанном пользователем.
 
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Введите первую цифру");
+        int firstNum = scanner.nextInt();
+
+        System.out.println("Введите вторую цифру");
+        int secondNum = scanner.nextInt();
+
+        if(firstNum > secondNum){
+            System.out.println("Ok");
+            int temp = firstNum;
+            firstNum = secondNum;
+            secondNum = temp;
+        }
+
+        for (int i = firstNum; i <= secondNum; i++){
+            for (int j = 1; j <= 10; j++){
+                System.out.print(i + " * " + j + " = " + i*j + ", ");
+            }
+            System.out.println();
+        }
+    }
+    public static void Task9(){
+//        Задание 9
+//        В одномерном массиве, заполненном случайными
+//        числами, определить минимальный и максимальный
+//        элементы, посчитать количество отрицательных элементов, посчитать количество положительных элементов, посчитать количество нулей. Результаты вывести
+//        на экран.
+
+        int[] randomArray = FillArr();
+
+        // Выводим массив на экран
+        System.out.println("Случайный массив:");
+        for (int number : randomArray) {
+            System.out.print(number + " ");
+        }
+        System.out.println();
+
+        int MinRandValue = randomArray[0];
+        int MaxRandValue = randomArray[0];
+        int countNegativeNum = 0;
+        int countPositiveNum = 0;
+        int countZero = 0;
+
+        for (int i = 0; i < randomArray.length; i++){
+            if(randomArray[i] < MinRandValue){
+                MinRandValue = randomArray[i];
+            }
+            if(randomArray[i] > MaxRandValue){
+                MaxRandValue = randomArray[i];
+            }
+            if(randomArray[i] < 0)
+            {
+                countNegativeNum++;
+            }
+            if(randomArray[i] > 0)
+            {
+                countPositiveNum++;
+            }
+            if(randomArray[i] == 0){
+                countZero++;
+            }
+        }
+
+        System.out.println("Минимальное значение: " + MinRandValue);
+        System.out.println("Максимальное значение: " + MaxRandValue);
+        System.out.println("Количество отрицательных значений: " + countNegativeNum);
+        System.out.println("Количество положительных значений: " + countPositiveNum);
+        System.out.println("Количество нулей: " + countZero);
+
+    }
+    public static void Task10(){
+//        Задание 10
+//        Есть одномерный массив, заполненный случайными
+//        числами. На основании данных этого массива нужно:
+//        ■ Создать одномерный массив, содержащий только
+//        четные числа из первого массива;
+//        ■ Создать одномерный массив, содержащий только
+//        нечетные числа из первого массива;
+//        ■ Создать одномерный массив, содержащий только
+//        отрицательные числа из первого массива;
+//        ■ Создать одномерный массив, содержащий только
+//        положительные числа из первого массива.
+
+        int[] randomArray = FillArr();
+
+        // Выводим массив на экран
+        System.out.println("Случайный массив:");
+        for (int number : randomArray) {
+            System.out.print(number + " ");
+        }
+        System.out.println();
+    }
+    public static int[] FillArr(){
+        int arrayLength = 10;
+        int minValue = -30;
+        int maxValue = 30;
+
+        int[] randomArray = new int[arrayLength];
+        Random random = new Random();
+
+        // Заполняем массив случайными числами
+        for (int i = 0; i < arrayLength; i++) {
+            randomArray[i] = random.nextInt(maxValue - minValue + 1) + minValue;
+        }
+        return randomArray;
+    }
 
 }
